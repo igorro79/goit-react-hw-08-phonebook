@@ -1,0 +1,7 @@
+{
+  "extends": ["stylelint-order-config-standard"],
+  "plugins": ["sltylelint-order"],
+  "rules": {
+    "indentation": [2]
+  }
+}
