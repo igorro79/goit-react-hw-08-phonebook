@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { render } from '@testing-library/react';
+import shortid from 'shortid';
 
 class Form extends Component {
   constructor(props) {
@@ -9,14 +9,26 @@ class Form extends Component {
       name: '',
       number: '',
     };
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  resetInput() {
+    this.setState({ name: '', number: '' });
   }
   handleInput(e) {
-    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value });
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const { name, number } = this.state;
+    const id = shortid.generate();
+    this.props.onSubmit(name, number, id);
+    this.resetInput();
   }
   render() {
-    // const { handleInput, handleSubmit } = this.props;
-    // console.log(handleInput);
-    // console.log(handleSubmit);
     return (
       <form onSubmit={this.handleSubmit}>
         <label>

@@ -16,31 +16,28 @@ class App extends Component {
         { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
         { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
       ],
-      // name: '',
-      // number: '',
+
       filter: '',
     };
 
     this.handleInput = this.handleInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.resetInput = this.resetInput.bind(this);
-  }
-  resetInput() {
-    this.setState({ name: '', number: '', filter: '' });
-  }
-  handleInput(e) {
-    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
+    this.addNewContact = this.addNewContact.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.setState(prevState => ({
-      contacts: [
-        { name: this.state.name, id: shortid.generate(), number: this.state.number },
-        ...prevState.contacts,
-      ],
+  handleInput(e) {
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value });
+  }
+  resetInput() {
+    this.setState({ filter: '' });
+  }
+  addNewContact(name, number, id) {
+    const newContact = { name, number, id };
+
+    this.setState(({ contacts }) => ({
+      contacts: [newContact, ...contacts],
     }));
-    this.resetInput();
   }
 
   render() {
@@ -54,10 +51,9 @@ class App extends Component {
         <h1>Phonebook</h1>
 
         <Form
-          // name={this.state.name}
-          // number={this.state.number}
+          onSubmit={this.addNewContact}
+          contacts={this.state.contacts}
           handleSubmit={this.handleSubmit}
-          handleInput={this.handleInput}
         />
         <Filter
           reset={this.resetInput}

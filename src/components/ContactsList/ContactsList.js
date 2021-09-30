@@ -1,5 +1,3 @@
-// import shortid from 'shortid';
-
 const ContactsList = ({ children }) => {
   return (
     <>
