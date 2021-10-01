@@ -1,0 +1,30 @@
+.form {
+  /* display: flex; */
+}
+.contactFormLabel {
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.contactFormInput {
+  margin-left: auto;
+  justify-self: right;
+  background-color: inherit;
+  border: none;
+  border-bottom: solid 2px darkslategrey;
+  outline: none;
+}
+.contactAddButton {
+  margin-top: 10px;
+  font-weight: 700;
+  min-width: 100px;
+  padding: 10px;
+  color: white;
+  background-color: green;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.contactAddButton:hover {
+  background-color: rgb(3, 100, 16);
+}

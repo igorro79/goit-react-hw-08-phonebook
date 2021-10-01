@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
-
+import s from './ContactForm.module.css';
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -30,10 +30,11 @@ class Form extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form className={s.form} onSubmit={this.handleSubmit}>
+        <label className={s.contactFormLabel}>
           Name
           <input
+            className={s.contactFormInput}
             onChange={this.handleInput}
             type="text"
             name="name"
@@ -43,9 +44,10 @@ class Form extends Component {
             required
           />
         </label>
-        <label>
+        <label className={s.contactFormLabel}>
           Phone
           <input
+            className={s.contactFormInput}
             onChange={this.handleInput}
             type="tel"
             value={this.state.number}
@@ -55,7 +57,7 @@ class Form extends Component {
             required
           />
         </label>
-        <button className="button" type="submit">
+        <button className={s.contactAddButton} type="submit">
           Add contact
         </button>
       </form>

@@ -1,0 +1,10 @@
+.contactListItem {
+  display: flex;
+}
+
+.contactListName {
+  margin-right: 8px;
+}
+.contactListNumber {
+  font-weight: 500;
+}

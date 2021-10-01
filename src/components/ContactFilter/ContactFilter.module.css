@@ -1,0 +1,13 @@
+.filterLabel {
+  font-size: 16px;
+  font-weight: 700;
+}
+.filterInput {
+  margin-left: 10px;
+
+  justify-self: right;
+  background-color: inherit;
+  border: none;
+  border-bottom: solid 2px darkslategrey;
+  outline: none;
+}

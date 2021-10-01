@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import s from './App.module.css';
 import shortid from 'shortid';
 
 import Form from './components/ContactForm/ContactForm';
@@ -47,7 +47,7 @@ class App extends Component {
       contact.name.toLocaleLowerCase().includes(lowLettersNames),
     );
     return (
-      <div>
+      <div className={s.contactSection}>
         <h1>Phonebook</h1>
 
         <Form

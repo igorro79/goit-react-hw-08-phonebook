@@ -1,10 +1,10 @@
 import shortid from 'shortid';
-
+import s from './ContactsListItem.module.css';
 const ContactsListItem = ({ contacts }) => {
   return contacts.map(contact => (
-    <li className="contact-list-item" key={shortid.generate()}>
-      <p className="contact-list-name">{contact.name}</p>
-      <p className="contact-list-number">{contact.number}</p>
+    <li className={s.contactListItem} key={shortid.generate()}>
+      <p className={s.contactListName}>{contact.name}</p>
+      <p className={s.contactListNumber}>{contact.number}</p>
     </li>
   ));
 };
