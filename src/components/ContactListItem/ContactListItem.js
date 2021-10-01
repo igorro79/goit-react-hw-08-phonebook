@@ -1,4 +1,6 @@
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
+
 import s from './ContactsListItem.module.css';
 const ContactsListItem = ({ contacts }) => {
   return contacts.map(contact => (
@@ -7,5 +9,9 @@ const ContactsListItem = ({ contacts }) => {
       <p className={s.contactListNumber}>{contact.number}</p>
     </li>
   ));
+};
+
+ContactsListItem.propTypes = {
+  contacts: PropTypes.array,
 };
 export default ContactsListItem;

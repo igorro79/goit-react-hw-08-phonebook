@@ -3,18 +3,27 @@ import s from './ContactFilter.module.css';
 
 const Filter = ({ filter, handleInput, reset }) => {
   return (
-    <label className={s.filterLabel}>
-      Find contacts by name
+    <div className={s.filterFormWrapper}>
+      <label htmlFor="filter" className={s.filterLabel}>
+        Find contacts by name
+      </label>
       <input
         className={s.filterInput}
         placeholder="Input contact name"
+        id="filter"
         onBlur={reset}
         onChange={handleInput}
         name="filter"
         type="text"
         value={filter}
       />
-    </label>
+    </div>
   );
+};
+
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  handleInput: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
 };
 export default Filter;

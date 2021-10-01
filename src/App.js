@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import s from './App.module.css';
-import shortid from 'shortid';
 
 import Form from './components/ContactForm/ContactForm';
 import ContactsList from './components/ContactsList/ContactsList';
@@ -34,7 +33,6 @@ class App extends Component {
   }
   addNewContact(name, number, id) {
     const newContact = { name, number, id };
-
     this.setState(({ contacts }) => ({
       contacts: [newContact, ...contacts],
     }));
@@ -42,10 +40,10 @@ class App extends Component {
 
   render() {
     const lowLettersNames = this.state.filter.toLocaleLowerCase();
-
     const filtered = this.state.contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(lowLettersNames),
     );
+
     return (
       <div className={s.contactSection}>
         <h1>Phonebook</h1>
