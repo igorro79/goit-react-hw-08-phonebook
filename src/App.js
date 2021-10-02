@@ -35,7 +35,10 @@ class App extends Component {
   addNewContact(name, number, id) {
     let useuExist = false;
     this.state.contacts.map(contact => {
-      if (name === contact.name || number === contact.number) {
+      if (
+        name.toLocaleLowerCase() === contact.name.toLocaleLowerCase() ||
+        number === contact.number
+      ) {
         alert('Such name or number alredy exist!');
         useuExist = true;
       }
