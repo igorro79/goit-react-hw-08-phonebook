@@ -22,6 +22,7 @@ class App extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.resetInput = this.resetInput.bind(this);
     this.addNewContact = this.addNewContact.bind(this);
+    this.removeContact = this.removeContact.bind(this);
   }
 
   handleInput(e) {
@@ -32,10 +33,28 @@ class App extends Component {
     this.setState({ filter: '' });
   }
   addNewContact(name, number, id) {
-    const newContact = { name, number, id };
-    this.setState(({ contacts }) => ({
-      contacts: [newContact, ...contacts],
-    }));
+    let useuExist = false;
+    this.state.contacts.map(contact => {
+      if (name === contact.name || number === contact.number) {
+        alert('Such name or number alredy exist!');
+        useuExist = true;
+      }
+    });
+    if (!useuExist) {
+      const newContact = { name, number, id };
+      this.setState(({ contacts }) => ({
+        contacts: [newContact, ...contacts],
+      }));
+    } else {
+      return;
+    }
+  }
+
+  removeContact(id) {
+    console.log(id);
+    const onRemove = this.state.contacts.filter(contact => contact.id !== id);
+    console.log(onRemove);
+    this.setState({ contacts: [...onRemove] });
   }
 
   render() {
@@ -60,7 +79,7 @@ class App extends Component {
           handleInput={this.handleInput}
         />
         <ContactsList>
-          <ContactsListItem contacts={filtered} />
+          <ContactsListItem contacts={filtered} removeContact={this.removeContact} />
         </ContactsList>
       </div>
     );

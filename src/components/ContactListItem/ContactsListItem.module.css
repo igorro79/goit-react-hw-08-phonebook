@@ -8,3 +8,17 @@
 .contactListNumber {
   font-weight: 500;
 }
+
+.removeContactBtn {
+  padding: 5px 10px;
+  height: fit-content;
+  align-self: center;
+  margin-left: auto;
+  font-weight: 500;
+  color: white;
+  background-color: red;
+  border-radius: 5px;
+}
+.removeContactBtn:hover {
+  background-color: rgb(177, 5, 5);
+}
