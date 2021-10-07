@@ -9,13 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      contacts: [
-        { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-        { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-        { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-        { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-      ],
-
+      contacts: [],
       filter: '',
     };
 
@@ -24,7 +18,15 @@ class App extends Component {
     this.addNewContact = this.addNewContact.bind(this);
     this.removeContact = this.removeContact.bind(this);
   }
+  componentDidMount() {
+    this.setState({ contacts: JSON.parse(localStorage.getItem('contacts')) || [] });
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
   handleInput(e) {
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
@@ -61,10 +63,15 @@ class App extends Component {
   }
 
   render() {
-    const lowLettersNames = this.state.filter.toLocaleLowerCase();
-    const filtered = this.state.contacts.filter(contact =>
-      contact.name.toLocaleLowerCase().includes(lowLettersNames),
-    );
+    let filtered;
+    if (this.state.filter.length > 0) {
+      const lowLettersNames = this.state.filter.toLocaleLowerCase();
+      filtered = this.state.contacts.filter(contact =>
+        contact.name.toLocaleLowerCase().includes(lowLettersNames),
+      );
+    } else {
+      filtered = this.state.contacts;
+    }
 
     return (
       <div className={s.contactSection}>
