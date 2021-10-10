@@ -15,11 +15,6 @@ export default class Modal extends Component {
       this.props.onClose();
     }
   };
-  // handleCloseModal = e => {
-  //   if (e.target === e.currentTarget) {
-  //     this.props.onClose();
-  //   }
-  // };
 
   render() {
     const { onClose, image } = this.props;
