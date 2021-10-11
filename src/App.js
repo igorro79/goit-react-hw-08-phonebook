@@ -31,19 +31,21 @@ class App extends Component {
     ApiService(this.state.searchQuery, this.state.pageNumber)
       .then(res => {
         if (res.hits.length === 0) {
+          this.setState({ showButton: false });
           alert('Found nothing!!!! Try one more time!');
         } else if (res.hits.length < 12) {
           this.setState({ showButton: false });
         } else {
-          window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth',
-          });
           this.setState({ showButton: true });
         }
 
         this.setState(prev => ({ gallery: [...prev.gallery, ...res.hits] }));
-        console.log(res.hits);
+        if (this.state.gallery.length > 12) {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth',
+          });
+        }
       })
       .catch(error => {
         console.log(error);
@@ -76,7 +78,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Searchbar onSearch={this.handleSearchbarSubmit} />
+        <Searchbar onSearch={this.handleSearchbarSubmit} prevSearchQuery={this.state.searchQuery} />
         <ImageGallery>
           <ImageGalleryItem
             gallery={this.state.gallery}

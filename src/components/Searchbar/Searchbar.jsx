@@ -19,6 +19,10 @@ class Searchbar extends Component {
       this.setState({ value: '' });
       return;
     }
+    if (this.state.value.trim() === this.props.prevSearchQuery) {
+      alert('You already see a result, enter a NEW search request');
+      return;
+    }
 
     this.props.onSearch(this.state.value);
     this.setState({ value: '' });
