@@ -4,18 +4,18 @@ import s from './Modal.module.css';
 const modalRoot = document.getElementById('modal-root');
 
 function Modal(props) {
-  useEffect(() => {
-    window.addEventListener('keydown', onEscButton);
-    return () => {
-      window.removeEventListener('keydown', onEscButton);
-    };
-  }, []);
-
   const onEscButton = e => {
     if (e.code === 'Escape') {
       props.onClose();
     }
   };
+
+  useEffect(() => {
+    window.addEventListener('keydown', onEscButton);
+    return () => {
+      window.removeEventListener('keydown', onEscButton);
+    };
+  });
 
   const { onClose, image } = props;
 
