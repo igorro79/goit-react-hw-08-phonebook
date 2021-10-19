@@ -1,8 +1,7 @@
 {
-  "name": "goit-react-hw-04-image-finder",
+  "name": "goit-react-hw-04-movies",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://igorro79.github.io/goit-react-hw-04-image-finder/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -12,6 +11,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-loader-spinner": "^4.0.0",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-toastify": "^8.0.3",
     "shortid": "^2.2.16",
@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "netlify deploy -p",
     "stylelint": "stylelint \"**/*.{css,scss,sass}\" --fix"
   },
   "eslintConfig": {
