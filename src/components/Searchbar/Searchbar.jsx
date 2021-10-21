@@ -1,7 +1,6 @@
 import { useState } from 'react';
+
 import s from './Searchbar.module.css';
-// import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Searchbar(props) {
   const [value, setValue] = useState('');
@@ -18,17 +17,12 @@ function Searchbar(props) {
       setValue('');
       return;
     }
-    if (value.trim() === props.prevSearchQuery) {
-      alert('You already see a result, enter a NEW search request');
-      return;
-    }
 
-    props.onSearch(value);
-    setValue('');
+    props.getSearchQuery(value);
   };
 
   return (
-    <header className={s.Searchbar}>
+    <div className={s.Searchbar}>
       <form className={s.SearchForm} onSubmit={handleSubmit}>
         <input
           className={s.SearchFormInput}
@@ -43,7 +37,7 @@ function Searchbar(props) {
           <span className={s.SearchFormButtonLabel}>Search</span>
         </button>
       </form>
-    </header>
+    </div>
   );
 }
 
