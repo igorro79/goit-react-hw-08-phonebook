@@ -5,7 +5,7 @@ const Spinner = () => {
   return (
     <div className={s.wrapper}>
       <Loader
-        type="TailSpin"
+        type="ThreeDots"
         color="#00BFFF"
         height={100}
         width={100}

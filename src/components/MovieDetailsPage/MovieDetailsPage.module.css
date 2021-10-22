@@ -4,3 +4,7 @@
   margin-bottom: 30px;
   align-items: flex-start;
 }
+.link {
+  display: block;
+  padding: 2px 0px;
+}

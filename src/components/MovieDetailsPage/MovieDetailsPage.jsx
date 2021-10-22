@@ -32,8 +32,8 @@ export default function MovieInfoView() {
             <h3>Overview: </h3>
             <p>{movie.overview || 'unknown'}</p>
             <h3>Genres</h3>
-            <p>{movie.genres.map(i => i.name).join(' ')}</p>
-            <Link to={`/${movieId}/credits`} style={{ display: 'block' }}>
+            <p>{movie.genres ? movie.genres.map(i => i.name).join(' ') : 'unknown genre'}</p>
+            <Link to={`/${movieId}/credits`} className={s.link}>
               Cast
             </Link>
             <Link to={`/${movieId}/reviews`}>Reviews</Link>

@@ -10,7 +10,6 @@ export default function HomePage() {
   useEffect(() => {
     api.fetchTrending().then(res => setMovies(res.results));
   }, []);
-  // movies && console.log(movies);
 
   return <Container>{movies && <FilmList movies={movies} />}</Container>;
 }
