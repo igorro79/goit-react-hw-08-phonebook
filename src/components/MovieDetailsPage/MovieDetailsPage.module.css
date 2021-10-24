@@ -8,3 +8,8 @@
   display: block;
   padding: 2px 0px;
 }
+.goBackBtn {
+  display: block;
+  padding: 3px 5px;
+  margin: 20px;
+}
