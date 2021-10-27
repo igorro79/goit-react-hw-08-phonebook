@@ -6,7 +6,7 @@ export default function FilmList(props) {
   return (
     props && (
       <ul>
-        {movies.map(
+        {movies?.map(
           movie =>
             // проверка отсутствия названия фильма
             movie.title && (

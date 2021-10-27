@@ -8,7 +8,7 @@ import Container from '../Container/Container';
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
   const location = useLocation();
-
+  sessionStorage.setItem('movies', null);
   useEffect(() => {
     api.fetchTrending().then(res => setMovies(res.results));
   }, []);

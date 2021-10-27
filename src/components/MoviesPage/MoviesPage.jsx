@@ -16,13 +16,22 @@ export default function MoviesPage() {
     if (searchQuery === null) {
       return;
     }
-    api.fetcnOnSearch(searchQuery).then(res => setMovies(res.results));
+    api.fetcnOnSearch(searchQuery).then(res => {
+      setMovies(res.results);
+      sessionStorage.setItem('movies', JSON.stringify(res.results));
+    });
   }, [searchQuery]);
 
   return (
     <>
       <Searchbar getSearchQuery={getSearchQuery} />
-      <div>{movies && <FilmList movies={movies} location={location} />}</div>
+      <div>
+        {JSON.parse(sessionStorage.getItem('movies')) ? (
+          <FilmList movies={JSON.parse(sessionStorage.getItem('movies'))} location={location} />
+        ) : (
+          <FilmList movies={movies} location={location} />
+        )}
+      </div>
     </>
   );
 }
