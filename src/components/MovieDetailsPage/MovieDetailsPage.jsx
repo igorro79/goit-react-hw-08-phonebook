@@ -21,12 +21,17 @@ export default function MovieInfoView() {
   };
 
   useEffect(() => {
-    api.fetchMovieDetail(movieId).then(setMovie);
+    api
+      .fetchMovieDetail(movieId)
+      .then(setMovie)
+      .catch(err => {
+        setMovie(false);
+      });
   }, [movieId]);
 
   return (
     <Container>
-      {movie && (
+      {movie ? (
         <>
           <button type="button" className={s.goBackBtn} onClick={onGoBack}>
             Go back
@@ -65,6 +70,8 @@ export default function MovieInfoView() {
             </div>
           </div>
         </>
+      ) : (
+        <h3>Film not found</h3>
       )}
 
       <Switch>

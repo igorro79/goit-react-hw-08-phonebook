@@ -19,6 +19,7 @@ export default function MoviesPage() {
 
   useEffect(() => {
     fromUrlQuery && setSearchQuery(fromUrlQuery);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function MoviesPage() {
       setMovies(res.results);
       history.push({ ...location, search: `query=${searchQuery}` });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return (
