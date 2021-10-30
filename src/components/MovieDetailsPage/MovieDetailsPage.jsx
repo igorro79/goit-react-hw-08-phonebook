@@ -7,6 +7,7 @@ import Reviews from '../Reviews/Reviews';
 import noImage from '../../images/No_image.png';
 import Container from '../../components/Container/Container';
 import s from './MovieDetailsPage.module.css';
+import Spinner from '../Spinner/Spinner';
 
 export default function MovieInfoView() {
   const [movie, setMovie] = useState(null);
@@ -15,7 +16,7 @@ export default function MovieInfoView() {
   const { movieId } = useParams();
   const location = useLocation();
   const history = useHistory();
-
+  const [fetchError, setFetchError] = useState(false);
   const onGoBack = () => {
     history.push(location?.state?.from);
   };
@@ -25,6 +26,7 @@ export default function MovieInfoView() {
       .fetchMovieDetail(movieId)
       .then(setMovie)
       .catch(err => {
+        setFetchError(true);
         setMovie(false);
       });
   }, [movieId]);
@@ -70,8 +72,10 @@ export default function MovieInfoView() {
             </div>
           </div>
         </>
-      ) : (
+      ) : fetchError ? (
         <h3>Film not found</h3>
+      ) : (
+        <Spinner />
       )}
 
       <Switch>
