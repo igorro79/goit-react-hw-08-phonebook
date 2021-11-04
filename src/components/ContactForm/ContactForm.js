@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import s from './ContactForm.module.css';
-import * as actions from '../redux/actions';
+import * as actions from '../redux/contacts-actions';
 
 function Form({ onSubmit }) {
   const [name, setName] = useState('');
@@ -32,7 +32,7 @@ function Form({ onSubmit }) {
     e.preventDefault();
 
     const id = shortid.generate();
-    onSubmit(name, number, id);
+    onSubmit({ name, number, id });
     resetInput();
   };
 
@@ -77,7 +77,7 @@ Form.propTypes = {
 
 const useDispachToProps = dispatch => {
   return {
-    onSubmit: (name, number, id) => dispatch(actions.addContact(name, number, id)),
+    onSubmit: newItem => dispatch(actions.addContact(newItem)),
   };
 };
 

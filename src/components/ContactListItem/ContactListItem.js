@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actions from '../redux/actions';
+import * as actions from '../redux/contacts-actions';
 
 import s from './ContactsListItem.module.css';
 

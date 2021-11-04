@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import s from './ContactFilter.module.css';
-import * as actions from '../redux/actions';
+import * as actions from '../redux/contacts-actions';
 
 const Filter = ({ state, filter, handleInput, reset }) => {
   return (
