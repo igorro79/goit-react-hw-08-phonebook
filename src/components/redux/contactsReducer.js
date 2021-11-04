@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const items = (state = [], action) => {
+const itemsReduser = (state = [{ id: 11, name: 'test', number: 123456789 }], action) => {
   switch (action.type) {
     case 'action/addContact':
       return [...state, action.payload];
@@ -12,8 +12,7 @@ const items = (state = [], action) => {
       return state;
   }
 };
-
-const filter = (state = '', action) => {
+const filterReduser = (state = '', action) => {
   switch (action.type) {
     case 'action/filterContact':
       return action.payload;
@@ -23,7 +22,13 @@ const filter = (state = '', action) => {
   }
 };
 
-export default combineReducers({
-  items,
-  filter,
+const contactsReduser = combineReducers({
+  items: itemsReduser,
+  filter: filterReduser,
 });
+
+const rootReduser = combineReducers({
+  contacts: contactsReduser,
+});
+
+export default rootReduser;
