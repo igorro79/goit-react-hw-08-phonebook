@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actions from '../redux/contacts-actions';
+import * as actions from '../../redux/contacts-actions';
 
 import s from './ContactsListItem.module.css';
 
@@ -42,8 +42,8 @@ ContactsListItem.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    contacts: state.contacts.items,
-    filter: state.contacts.filter,
+    contacts: state.items,
+    filter: state.filter,
   };
 };
 

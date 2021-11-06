@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import s from './ContactFilter.module.css';
-import * as actions from '../redux/contacts-actions';
+import * as actions from '../../redux/contacts-actions';
 
 const Filter = ({ state, filter, handleInput, reset }) => {
   return (
@@ -22,15 +22,6 @@ const Filter = ({ state, filter, handleInput, reset }) => {
   );
 };
 
-const mapStateToProps = state => {
-  const { items, filter } = state.contacts;
-  const lowLettersNames = filter.toLocaleLowerCase();
-  const visibleContacts = items.filter(item =>
-    item.name.toLocaleLowerCase().includes(lowLettersNames),
-  );
-  return { items: visibleContacts };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     handleInput: e => dispatch(actions.filterContact(e.target.value)),
@@ -41,4 +32,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(null, mapDispatchToProps)(Filter);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import s from './ContactForm.module.css';
-import * as actions from '../redux/contacts-actions';
+import * as actions from '../../redux/contacts-actions';
 
 function Form({ onSubmit }) {
   const [name, setName] = useState('');
