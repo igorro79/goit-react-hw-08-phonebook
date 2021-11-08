@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import shortid from 'shortid';
+// import shortid from 'shortid';
 import s from './ContactForm.module.css';
-import * as actions from '../../redux/contacts-actions';
+import * as actions from '../../redux/contacts-operations';
 
 function Form({ onSubmit }) {
   const [name, setName] = useState('');
@@ -31,8 +31,9 @@ function Form({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const id = shortid.generate();
-    onSubmit({ name, number, id });
+    // const id = shortid.generate();
+    onSubmit({ name, number });
+
     resetInput();
   };
 
@@ -77,7 +78,9 @@ Form.propTypes = {
 
 const useDispachToProps = dispatch => {
   return {
-    onSubmit: newItem => dispatch(actions.addContact(newItem)),
+    onSubmit: newItem => {
+      dispatch(actions.addContact(newItem));
+    },
   };
 };
 

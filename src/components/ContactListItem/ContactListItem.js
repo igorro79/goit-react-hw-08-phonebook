@@ -1,15 +1,19 @@
-import shortid from 'shortid';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/contacts-actions';
+import * as actions from '../../redux/contacts-operations';
 
 import s from './ContactsListItem.module.css';
 
-const ContactsListItem = ({ filter, contacts, removeContact }) => {
+const ContactsListItem = ({ filter, contacts, deleteContact, fetchContacts }) => {
   const getVisibleContacts = (f, c) => {
     const normalizedFilter = f.toLowerCase();
     return c.filter(({ name }) => name.toLowerCase().includes(normalizedFilter));
   };
+  useEffect(() => {
+    fetchContacts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (contacts.length === 0) {
     return (
@@ -19,14 +23,14 @@ const ContactsListItem = ({ filter, contacts, removeContact }) => {
     );
   } else {
     return getVisibleContacts(filter, contacts).map(contact => (
-      <li className={s.contactListItem} key={shortid.generate()}>
+      <li className={s.contactListItem} key={contact.id}>
         <p className={s.contactListName}>{contact.name}</p>
         <p className={s.contactListNumber}>{contact.number}</p>
         <button
           className={s.removeContactBtn}
           type="button"
           onClick={() => {
-            removeContact(contact.id);
+            deleteContact(contact.id);
           }}
         >
           Remove
@@ -49,7 +53,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeContact: id => dispatch(actions.removeContact(id)),
+    deleteContact: id => dispatch(actions.deleteContact(id)),
+    fetchContacts: () => dispatch(actions.fetchContacts()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsListItem);
