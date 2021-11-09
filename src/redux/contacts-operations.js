@@ -30,4 +30,11 @@ export const deleteContact = id => dispatch => {
     .catch(err => dispatch(actions.deleteContactError(err)));
 };
 
-export const filterContact = {};
+// export const filterContact = {};
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  fetchContacts,
+  addContact,
+  deleteContact,
+};

@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import shortid from 'shortid';
 import s from './ContactForm.module.css';
-import * as actions from '../../redux/contacts-operations';
+import { contactsOperations, contactsSelectors } from '../../redux/';
 
-function Form({ onSubmit }) {
+function Form({ onSubmit, contacts }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -31,9 +30,12 @@ function Form({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // const id = shortid.generate();
-    onSubmit({ name, number });
+    // if (contacts.map(contact => contact.name === name)) {
+    // alert('already exist')
+    //   return;
+    // } //=========почему то не выходит сделать проверку ====== срабатывает на любой ввод=====
 
+    onSubmit({ name, number });
     resetInput();
   };
 
@@ -76,12 +78,18 @@ Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
+const useStateToProps = state => {
+  return {
+    contacts: contactsSelectors.getContacts(state),
+  };
+};
+
 const useDispachToProps = dispatch => {
   return {
     onSubmit: newItem => {
-      dispatch(actions.addContact(newItem));
+      dispatch(contactsOperations.addContact(newItem));
     },
   };
 };
 
-export default connect(null, useDispachToProps)(Form);
+export default connect(useStateToProps, useDispachToProps)(Form);

@@ -1,15 +1,11 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actions from '../../redux/contacts-operations';
-
+import { contactsOperations } from '../../redux/';
+import { contactsSelectors } from '../../redux/';
 import s from './ContactsListItem.module.css';
 
-const ContactsListItem = ({ filter, contacts, deleteContact, fetchContacts }) => {
-  const getVisibleContacts = (f, c) => {
-    const normalizedFilter = f.toLowerCase();
-    return c.filter(({ name }) => name.toLowerCase().includes(normalizedFilter));
-  };
+const ContactsListItem = ({ filtered, contacts, deleteContact, fetchContacts }) => {
   useEffect(() => {
     fetchContacts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -22,7 +18,7 @@ const ContactsListItem = ({ filter, contacts, deleteContact, fetchContacts }) =>
       </li>
     );
   } else {
-    return getVisibleContacts(filter, contacts).map(contact => (
+    return filtered.map(contact => (
       <li className={s.contactListItem} key={contact.id}>
         <p className={s.contactListName}>{contact.name}</p>
         <p className={s.contactListNumber}>{contact.number}</p>
@@ -46,15 +42,16 @@ ContactsListItem.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    contacts: state.items,
-    filter: state.filter,
+    contacts: contactsSelectors.getContacts(state),
+    filter: contactsSelectors.getFilter(state),
+    filtered: contactsSelectors.getVisibleContacts(state),
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteContact: id => dispatch(actions.deleteContact(id)),
-    fetchContacts: () => dispatch(actions.fetchContacts()),
+    deleteContact: id => dispatch(contactsOperations.deleteContact(id)),
+    fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsListItem);

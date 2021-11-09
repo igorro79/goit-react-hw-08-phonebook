@@ -1,8 +1,12 @@
 import { connect } from 'react-redux';
 import s from './ContactFilter.module.css';
 import * as actions from '../../redux/contacts-actions';
+import { contactsSelectors } from '../../redux/';
 
-const Filter = ({ state, filter, handleInput, reset }) => {
+const Filter = ({ filter, handleInput, filtered, reset }) => {
+  //   if (filtered.length < 1) {
+  //     reset();
+  // }
   return (
     <div className={s.filterFormWrapper}>
       <label htmlFor="filter" className={s.filterLabel}>
@@ -12,7 +16,6 @@ const Filter = ({ state, filter, handleInput, reset }) => {
         className={s.filterInput}
         placeholder="Input contact name"
         id="filter"
-        onBlur={reset}
         onChange={handleInput}
         name="filter"
         type="text"
@@ -25,11 +28,15 @@ const Filter = ({ state, filter, handleInput, reset }) => {
 const mapDispatchToProps = dispatch => {
   return {
     handleInput: e => dispatch(actions.filterContact(e.target.value)),
-    reset: e => {
+    reset: () => {
       dispatch(actions.filterContact(''));
-      e.target.value = '';
     },
   };
 };
-
-export default connect(null, mapDispatchToProps)(Filter);
+const mapStateToProps = state => {
+  return {
+    filtered: contactsSelectors.getVisibleContacts(state),
+    filter: contactsSelectors.getFilter(state),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
