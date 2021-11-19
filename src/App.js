@@ -1,20 +1,34 @@
-import s from './App.module.css';
+// import s from './App.module.css';
+import { Switch } from 'react-router-dom';
+import { Route } from 'react-router';
 
-import Form from './components/ContactForm/ContactForm';
-import ContactsList from './components/ContactsList/ContactsList';
-import ContactsListItem from './components/ContactListItem/ContactListItem';
-import Filter from './components/ContactFilter/ContactFilter';
+import Contacts from './components/Contacts/Contacts';
+
+import Home from './components/Home/Home';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import AppBar from './components/AppBar/AppBar';
 
 function App() {
   return (
-    <div className={s.contactSection}>
-      <h1>Phonebook</h1>
-      <Form />
-      <Filter />
-      <ContactsList>
-        <ContactsListItem />
-      </ContactsList>
+    <div>
+      <AppBar />
+
+      <Switch>
+        <Route path="/" component={Home} exact></Route>
+        <Route path="/login" component={Login} exact></Route>
+        <Route path="/register" component={Register} exact></Route>
+        <Route path="/contacts" component={Contacts} exact></Route>
+      </Switch>
     </div>
+    // <div className={s.contactSection}>
+    //   <h1>Phonebook</h1>
+    //   <Form />
+    //   <Filter />
+    //   <ContactsList>
+    //     <ContactsListItem />
+    //   </ContactsList>
+    // </div>
   );
 }
 
