@@ -5,7 +5,7 @@ function Navigation() {
     <div>
       <nav style={{ display: 'flex' }}>
         <NavLink to="/">Главная</NavLink>
-        {/* <NavLink to="/contacts">Контакты</NavLink> */}
+        <NavLink to="/contacts">Контакты</NavLink>
       </nav>
     </div>
   );

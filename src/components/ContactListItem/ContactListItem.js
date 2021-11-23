@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { contactsOperations } from '../../redux/';
-import { contactsSelectors } from '../../redux/';
+// import { useSelector, useDispatch } from 'react-redux';
+
+import { contactsOperations, contactsSelectors } from '../../redux/contacts';
+
 import s from './ContactsListItem.module.css';
 
-const ContactsListItem = ({ filtered, contacts, deleteContact, fetchContacts }) => {
+const ContactsListItem = ({ contacts, filter, filtered, deleteContact, fetchContacts }) => {
+  // const dispatch = useDispatch();
+  // const contacts = useSelector(contactsSelectors.getContacts());
+  // const deleteContact = id => dispatch(contactsOperations.deleteContact(id));
+
   useEffect(() => {
     fetchContacts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   if (contacts.length === 0) {
     return (
       <li className={s.contactListItem}>
@@ -18,7 +23,7 @@ const ContactsListItem = ({ filtered, contacts, deleteContact, fetchContacts }) 
       </li>
     );
   } else {
-    return filtered.map(contact => (
+    return contacts.map(contact => (
       <li className={s.contactListItem} key={contact.id}>
         <p className={s.contactListName}>{contact.name}</p>
         <p className={s.contactListNumber}>{contact.number}</p>

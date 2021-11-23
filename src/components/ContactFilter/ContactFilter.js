@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import s from './ContactFilter.module.css';
-import * as actions from '../../redux/contacts-actions';
-import { contactsSelectors } from '../../redux/';
+import * as actions from '../../redux/contacts/contacts-actions';
+import { contactsSelectors } from '../../redux/contacts';
 
 const Filter = ({ filter, handleInput, filtered, reset }) => {
   //   if (filtered.length < 1) {

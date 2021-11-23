@@ -1,8 +1,10 @@
 // import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { authOperations } from '../../redux/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { authOperations, authSelectors } from '../../redux/auth';
+import avatar from '../../images/avatar.png';
 
 function AuthNav() {
+  const name = useSelector(authSelectors.getUserName);
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -11,7 +13,8 @@ function AuthNav() {
 
   return (
     <div>
-      <p>Hello user</p>
+      <img src={avatar} alt="" width="32" />
+      <p>Hello {name}</p>
       <button type="button" onClick={handleClick}>
         Exit
       </button>

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import * as actions from './contacts-actions';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'http://localhost:4040';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const fetchContacts = () => dispatch => {
   dispatch(actions.fetchContactsRequest());
@@ -30,7 +31,7 @@ export const deleteContact = id => dispatch => {
     .catch(err => dispatch(actions.deleteContactError(err)));
 };
 
-// export const filterContact = {};
+export const filterContact = {};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
