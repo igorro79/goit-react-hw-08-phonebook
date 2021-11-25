@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
 import { contactsOperations, contactsSelectors } from '../../redux/contacts';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 function Form({ onSubmit, contacts }) {
   const [name, setName] = useState('');
@@ -38,9 +40,36 @@ function Form({ onSubmit, contacts }) {
     onSubmit({ name, number });
     resetInput();
   };
-
+  // const ariaLabel = { 'aria-label': 'Enter new contact name' };
   return (
     <form className={s.form} onSubmit={handleSubmit}>
+      <Box
+        component="span"
+        sx={{
+          p: 2,
+          width: 'auto',
+          border: '1px dashed grey',
+          display: 'flex',
+          alignItems: 'center',
+          '& > :not(style)': { m: 1 },
+        }}
+      >
+        <TextField
+          autoFocus="true"
+          size="small"
+          id="outlined-name"
+          placeholder="Enter a name"
+          inputProps={{ 'aria-label': 'Enter new contact name' }}
+        />
+        <TextField
+          autoFocus="true"
+          size="small"
+          id="outlined-name"
+          placeholder="Enter a number"
+          inputProps={{ 'aria-label': 'Enter new contact name' }}
+        />
+      </Box>
+
       <label className={s.contactFormLabel}>
         Name
         <input

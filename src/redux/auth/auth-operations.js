@@ -41,10 +41,18 @@ const logout = createAsyncThunk('auth/logout', async () => {
   }
 });
 
-const fetchCurrentUser = createAsyncThunk('auth/current', async enteredUserdata => {
+const fetchCurrentUser = createAsyncThunk('auth/current', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persisterdToken = state.auth.token;
+
+  token.set(persisterdToken);
+
+  if (persisterdToken === null) {
+    return thunkAPI.rejectWithValue();
+  }
+
   try {
-    const { data } = await axios.get('/users/curret', enteredUserdata);
-    console.log('login result', data);
+    const { data } = await axios.get('/users/current');
     return data;
   } catch (error) {
     console.log('eeeerrrrorrrr', error);

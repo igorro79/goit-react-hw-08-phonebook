@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations, authSelectors } from '../../redux/auth';
 import avatar from '../../images/avatar.png';
+import Button from '@mui/material/Button';
 
 function AuthNav() {
   const name = useSelector(authSelectors.getUserName);
@@ -15,9 +16,9 @@ function AuthNav() {
     <div>
       <img src={avatar} alt="" width="32" />
       <p>Hello {name}</p>
-      <button type="button" onClick={handleClick}>
+      <Button variant="outlined" size="small" color="error" onClick={handleClick}>
         Exit
-      </button>
+      </Button>
     </div>
   );
 }
