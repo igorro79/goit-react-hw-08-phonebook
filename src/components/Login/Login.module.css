@@ -1,7 +1,9 @@
 .form {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
 }
-.contactFormLabel {
+/* .contactFormLabel {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -31,4 +33,4 @@
 }
 .contactAddButton:hover {
   background-color: rgb(113, 0, 179);
-}
+} */

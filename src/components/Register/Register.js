@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import * as s from './Register.module.css';
 import { useDispatch } from 'react-redux';
+// import PropTypes from 'prop-types';
+
 import authOperations from '../../redux/auth/auth-operations';
+import { TextField, Button } from '@mui/material';
 
 function Register() {
   const [name, setName] = useState('');
@@ -40,52 +43,39 @@ function Register() {
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
-      <label className={s.contactFormLabel}>
-        Name
-        <input
-          className={s.contactFormInput}
-          onChange={handleInput}
-          type="text"
-          name="name"
-          value={name}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-          required
-        />
-      </label>
-      <label className={s.contactFormLabel}>
-        Phone
-        <input
-          className={s.contactFormInput}
-          onChange={handleInput}
-          type="email"
-          value={email}
-          name="email"
-          title="enter email"
-          required
-        />
-      </label>
-      <label className={s.contactFormLabel}>
-        Password
-        <input
-          className={s.contactFormInput}
-          onChange={handleInput}
-          type="password"
-          value={password}
-          name="password"
-          title="enter password"
-          required
-        />
-      </label>
-      <button className={s.contactAddButton} type="submit">
-        Register
-      </button>
+      <TextField
+        sx={{ mb: 1 }}
+        id="outlined-name"
+        label="Name"
+        name="name"
+        type="text"
+        value={name}
+        size="small"
+        onChange={handleInput}
+      />
+      <TextField
+        sx={{ mb: 1 }}
+        id="outlined-name"
+        label="Email"
+        name="email"
+        type="text"
+        value={email}
+        size="small"
+        onChange={handleInput}
+      />
+      <TextField
+        sx={{ mb: 1 }}
+        id="outlined-name"
+        label="Password"
+        type="password"
+        name="password"
+        value={password}
+        size="small"
+        onChange={handleInput}
+      />
+      <Button size="small">SignUp</Button>
     </form>
   );
 }
-
-// Form.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
 
 export default Register;

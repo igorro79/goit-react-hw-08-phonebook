@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import * as s from './Login.module.css';
 import { useDispatch } from 'react-redux';
+// import PropTypes from 'prop-types';
 import { authOperations } from '../../redux/auth';
+import { TextField, Button } from '@mui/material';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -35,41 +37,33 @@ function Login() {
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
-      <label className={s.contactFormLabel}>
-        Email
-        <input
-          className={s.contactFormInput}
-          onChange={handleInput}
-          type="email"
-          value={email}
-          name="email"
-          // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="enter email"
-          required
-        />
-      </label>
-      <label className={s.contactFormLabel}>
-        Password
-        <input
-          className={s.contactFormInput}
-          onChange={handleInput}
-          type="password"
-          value={password}
-          name="password"
-          // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="enter password"
-          required
-        />
-      </label>
-      <button className={s.contactAddButton} type="submit">
-        Login
-      </button>
+      <TextField
+        sx={{ mb: 1 }}
+        // id="outlined-name"
+        label="Email"
+        name="email"
+        type="text"
+        value={email}
+        size="small"
+        onChange={handleInput}
+        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+      />
+      <TextField
+        sx={{ mb: 1 }}
+        // id="outlined-name"
+        label="Password"
+        type="password"
+        name="password"
+        value={password}
+        size="small"
+        onChange={handleInput}
+        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+      />
+      <Button type="submit" size="small">
+        Sign In
+      </Button>
     </form>
   );
 }
-
-// Form.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
 
 export default Login;

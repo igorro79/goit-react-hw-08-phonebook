@@ -1,12 +1,35 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink as NativLink } from 'react-router-dom';
+import { Link, Box } from '@mui/material';
 
 function Navigation() {
   return (
     <div>
-      <nav style={{ display: 'flex' }}>
-        <NavLink to="/">Главная</NavLink>
-        <NavLink to="/contacts">Контакты</NavLink>
-      </nav>
+      <Box sx={{ display: 'flex' }}>
+        <Link
+          component={NativLink}
+          to="/"
+          variant="h6"
+          underline="hover"
+          color="#fff"
+          sx={{
+            p: 2,
+          }}
+        >
+          Главная
+        </Link>
+        <Link
+          component={NativLink}
+          to="/contacts"
+          variant="h6"
+          underline="hover"
+          color="#fff"
+          sx={{
+            p: 2,
+          }}
+        >
+          Контакты
+        </Link>
+      </Box>
     </div>
   );
 }

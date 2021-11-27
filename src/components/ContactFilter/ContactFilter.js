@@ -1,27 +1,32 @@
 import { connect } from 'react-redux';
-import s from './ContactFilter.module.css';
+
 import * as actions from '../../redux/contacts/contacts-actions';
 import { contactsSelectors } from '../../redux/contacts';
+import { TextField, Typography, Box } from '@mui/material';
 
 const Filter = ({ filter, handleInput, filtered, reset }) => {
   //   if (filtered.length < 1) {
   //     reset();
   // }
   return (
-    <div className={s.filterFormWrapper}>
-      <label htmlFor="filter" className={s.filterLabel}>
-        Find contacts by name
-      </label>
-      <input
-        className={s.filterInput}
-        placeholder="Input contact name"
-        id="filter"
-        onChange={handleInput}
-        name="filter"
-        type="text"
-        value={filter}
-      />
-    </div>
+    <Box sx={{ p: '3px', border: '1px solid grey', borderRadius: '5px' }}>
+      <Typography variant="subtitle1">Find Contact</Typography>{' '}
+      <Box>
+        {' '}
+        <TextField
+          fullWidth
+          name="filter"
+          value={filter}
+          onChange={handleInput}
+          sx={{ mr: 1 }}
+          label="Enter a name"
+          size="small"
+          type="text"
+          id="outlined-name"
+          inputProps={{ 'aria-label': 'Enter new contact name' }}
+        />
+      </Box>
+    </Box>
   );
 };
 

@@ -1,34 +1,51 @@
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { useSelector, useDispatch } from 'react-redux';
+
+import { Typography, Grid, IconButton, Link } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { contactsOperations, contactsSelectors } from '../../redux/contacts';
 
-import s from './ContactsListItem.module.css';
-
 const ContactsListItem = ({ contacts, filter, filtered, deleteContact }) => {
+  const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
   if (contacts.length === 0) {
     return (
-      <li className={s.contactListItem}>
-        <h4>The list is empty</h4>
-      </li>
+      <>
+        <Typography>Contacts:</Typography>
+        <Grid container spacing={2}>
+          <Grid key="1" item>
+            <Typography>No contacts avalible</Typography>
+          </Grid>
+        </Grid>
+      </>
     );
   } else {
     return filtered.map(contact => (
-      <li className={s.contactListItem} key={contact.id}>
-        <p className={s.contactListName}>{contact.name}</p>
-        <p className={s.contactListNumber}>{contact.number}</p>
-        <button
-          className={s.removeContactBtn}
-          type="button"
-          onClick={() => {
-            deleteContact(contact.id);
-          }}
-        >
-          Remove
-        </button>
-      </li>
+      <Grid key={contact.id} item xs={12} sm={6} md={4} lg={3}>
+        <Item sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+          <Typography sx={{ mr: '5px' }}>{contact.name}</Typography>
+          <Typography>
+            <Link href={`tel:${contact.number}`}>{contact.number}</Link>
+          </Typography>
+          <IconButton
+            sx={{ ml: 'auto' }}
+            aria-label="Example"
+            onClick={() => {
+              deleteContact(contact.id);
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Item>
+      </Grid>
     ));
   }
 };
