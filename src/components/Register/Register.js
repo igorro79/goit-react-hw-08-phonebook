@@ -73,7 +73,9 @@ function Register() {
         size="small"
         onChange={handleInput}
       />
-      <Button size="small">SignUp</Button>
+      <Button type="submit" size="small">
+        SignUp
+      </Button>
     </form>
   );
 }

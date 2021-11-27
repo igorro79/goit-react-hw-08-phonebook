@@ -18,14 +18,9 @@ const ContactsListItem = ({ contacts, filter, filtered, deleteContact }) => {
 
   if (contacts.length === 0) {
     return (
-      <>
-        <Typography>Contacts:</Typography>
-        <Grid container spacing={2}>
-          <Grid key="1" item>
-            <Typography>No contacts avalible</Typography>
-          </Grid>
-        </Grid>
-      </>
+      <Grid key="1" item>
+        <Typography>No contacts avalible</Typography>
+      </Grid>
     );
   } else {
     return filtered.map(contact => (
