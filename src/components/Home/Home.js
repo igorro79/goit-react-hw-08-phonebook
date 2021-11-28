@@ -1,19 +1,20 @@
 // import PropTypes from 'prop-types';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
+// import Register from '../Register/Register';
+// import Login from '../Login/Login';
 import { useEffect } from 'react';
 import { NavLink as NativLink, Switch, useHistory } from 'react-router-dom';
-import PublicRoute from '../../Routes/Public-route';
+// import PublicRoute from '../../Routes/Public-route';
 import { Link, Box, Typography, Container } from '@mui/material';
 import * as s from './Home.module.css';
 
-function Home() {
-  const history = useHistory();
-  useEffect(() => {
-    history.push('/login');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+function Home({ children }) {
+  // const history = useHistory();
+  // useEffect(() => {
+  // history.push('/login');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
+  console.log(children);
   return (
     <Container>
       <Box
@@ -41,14 +42,7 @@ function Home() {
             </Link>{' '}
           </Typography>
         </Box>
-        <Switch>
-          <PublicRoute path="/login" exact restricted>
-            <Login />
-          </PublicRoute>
-          <PublicRoute path="/register" exact restricted>
-            <Register />
-          </PublicRoute>
-        </Switch>
+        {children}
       </Box>
     </Container>
   );

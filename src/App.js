@@ -7,11 +7,15 @@ import PrivateRoute from './Routes/Private-route';
 import PublicRoute from './Routes/Public-route';
 
 import { Container } from '@mui/material';
+import PageNotFound from './components/PageNotFound/PageNotFound';
+import Spinner from './components/Spinner/Spinner';
+const Register = lazy(() => import('./components/Register/Register'));
+const Login = lazy(() => import('./components/Login/Login'));
+// import Register from './components/Register/Register';
+// import Login from './components/Login/Login';
 
 const Contacts = lazy(() => import('./components/Contacts/Contacts'));
 const Home = lazy(() => import('./components/Home/Home'));
-// const Register = lazy(() => import('./components/Register/Register'));
-// const Login = lazy(() => import('./components/Login/Login'));
 
 function App() {
   const dispatch = useDispatch();
@@ -24,13 +28,34 @@ function App() {
   return (
     !isFetchingContacts && (
       <Container>
-        <Suspense fallback={<p>loading</p>}>
+        <Suspense fallback={<Spinner />}>
           <Switch>
             <PrivateRoute path="/contacts" exact>
-              <Contacts />
+              <Suspense fallback={<Spinner />}>
+                <Contacts />
+              </Suspense>
             </PrivateRoute>
-            <PublicRoute path="/" restricted>
+            <PublicRoute path="/" exact restricted>
               <Home />
+            </PublicRoute>
+            <PublicRoute path="/login" exact restricted>
+              <Home>
+                <Suspense fallback={<Spinner />}>
+                  <Login />
+                </Suspense>
+              </Home>
+            </PublicRoute>
+            <PublicRoute path="/register" exact restricted>
+              <Home>
+                <Suspense fallback={<Spinner />}>
+                  <Register />
+                </Suspense>
+              </Home>
+            </PublicRoute>
+            <PublicRoute>
+              <Suspense fallback={<Spinner />}>
+                <PageNotFound />
+              </Suspense>
             </PublicRoute>
           </Switch>
         </Suspense>
