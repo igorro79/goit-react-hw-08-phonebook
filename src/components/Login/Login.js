@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as s from './Login.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import PropTypes from 'prop-types';
-import { authOperations } from '../../redux/auth';
-import { TextField, Button } from '@mui/material';
+import { authOperations, authSelectors, authReducer } from '../../redux/auth';
+import { errorReset } from '../../redux/auth/auth-slice';
+import { TextField, Button, Typography } from '@mui/material';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const errorCurrent = useSelector(authSelectors.getErrorStatus);
+
+  useEffect(() => {
+    if (errorCurrent !== null) dispatch(errorReset(null));
+  }, []);
 
   const resetInput = () => {
     setEmail('');
@@ -34,12 +40,12 @@ function Login() {
 
     resetInput();
   };
+  const errorCheck = useSelector(authSelectors.getErrorStatus);
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
       <TextField
         sx={{ mb: 1 }}
-        // id="outlined-name"
         label="Email"
         name="email"
         type="text"
@@ -50,7 +56,6 @@ function Login() {
       />
       <TextField
         sx={{ mb: 1 }}
-        // id="outlined-name"
         label="Password"
         type="password"
         name="password"
@@ -59,6 +64,11 @@ function Login() {
         onChange={handleInput}
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
       />
+      {errorCheck && (
+        <Typography align="center" className={s.warning}>
+          Wrong email or password
+        </Typography>
+      )}
       <Button type="submit" size="small">
         Sign In
       </Button>

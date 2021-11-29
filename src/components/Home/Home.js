@@ -1,20 +1,11 @@
 // import PropTypes from 'prop-types';
-// import Register from '../Register/Register';
-// import Login from '../Login/Login';
-import { useEffect } from 'react';
-import { NavLink as NativLink, Switch, useHistory } from 'react-router-dom';
-// import PublicRoute from '../../Routes/Public-route';
+
+import { NavLink as NativLink } from 'react-router-dom';
+
 import { Link, Box, Typography, Container } from '@mui/material';
 import * as s from './Home.module.css';
 
 function Home({ children }) {
-  // const history = useHistory();
-  // useEffect(() => {
-  // history.push('/login');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  console.log(children);
   return (
     <Container>
       <Box

@@ -3,6 +3,10 @@
   flex-direction: column;
   max-width: 250px;
 }
+.warning {
+  color: red;
+  font-size: 12px;
+}
 /* .contactFormLabel {
   display: flex;
   width: 100%;

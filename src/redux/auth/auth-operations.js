@@ -12,52 +12,56 @@ const token = {
   },
 };
 
-const register = createAsyncThunk('auth/register', async enteredUserdata => {
+const register = createAsyncThunk('auth/register', async (enteredUserdata, { rejectWithValue }) => {
   try {
     const { data } = await axios.post('/users/signup', enteredUserdata);
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log('eeeerrrrorrrr', error);
+    return rejectWithValue(error.message);
   }
 });
 
-const login = createAsyncThunk('auth/login', async enteredUserdata => {
+const login = createAsyncThunk('auth/login', async (enteredUserdata, { rejectWithValue }) => {
   try {
     const { data } = await axios.post('/users/login', enteredUserdata);
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log('eeeerrrrorrrr', error);
+    return rejectWithValue(error.message);
   }
 });
-const logout = createAsyncThunk('auth/logout', async () => {
+const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
   try {
     const { data } = await axios.post('/users/logout');
     token.unset();
     return data;
   } catch (error) {
-    console.log('eeeerrrrorrrr', error);
+    return rejectWithValue(error.message);
   }
 });
 
-const fetchCurrentUser = createAsyncThunk('auth/current', async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const persisterdToken = state.auth.token;
+const fetchCurrentUser = createAsyncThunk(
+  'auth/current',
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState();
+    const persisterdToken = state.auth.token;
 
-  token.set(persisterdToken);
+    token.set(persisterdToken);
 
-  if (persisterdToken === null) {
-    return thunkAPI.rejectWithValue();
-  }
+    if (persisterdToken === null) {
+      return rejectWithValue();
+    }
 
-  try {
-    const { data } = await axios.get('/users/current');
-    return data;
-  } catch (error) {
-    console.log('eeeerrrrorrrr', error);
-  }
-});
+    try {
+      const { data } = await axios.get('/users/current');
+      console.log(data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
 const authOperations = {
   register,

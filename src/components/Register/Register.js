@@ -1,16 +1,25 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as s from './Register.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import PropTypes from 'prop-types';
 
-import authOperations from '../../redux/auth/auth-operations';
-import { TextField, Button } from '@mui/material';
+import { authOperations, authSelectors } from '../../redux/auth';
+import { errorReset } from '../../redux/auth/auth-slice';
+
+import { TextField, Button, Typography } from '@mui/material';
+// import authSlice from '../../redux/auth/auth-slice';
 
 function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const errorCurrent = useSelector(authSelectors.getErrorStatus);
+
+  useEffect(() => {
+    if (errorCurrent !== null) dispatch(errorReset(null));
+  }, []);
 
   const resetInput = () => {
     setName('');
@@ -40,6 +49,7 @@ function Register() {
     dispatch(authOperations.register({ name, email, password }));
     resetInput();
   };
+  const errorCheck = useSelector(authSelectors.getErrorStatus);
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
@@ -73,6 +83,11 @@ function Register() {
         size="small"
         onChange={handleInput}
       />
+      {errorCheck && (
+        <Typography align="center" className={s.warning}>
+          User with such email already exist.
+        </Typography>
+      )}
       <Button type="submit" size="small">
         SignUp
       </Button>
