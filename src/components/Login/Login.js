@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import * as s from './Login.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import PropTypes from 'prop-types';
-import { authOperations, authSelectors, authReducer } from '../../redux/auth';
+import { authOperations, authSelectors } from '../../redux/auth';
 import { errorReset } from '../../redux/auth/auth-slice';
 import { TextField, Button, Typography } from '@mui/material';
 
@@ -14,6 +14,7 @@ function Login() {
 
   useEffect(() => {
     if (errorCurrent !== null) dispatch(errorReset(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const resetInput = () => {

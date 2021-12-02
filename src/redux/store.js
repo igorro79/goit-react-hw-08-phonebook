@@ -1,7 +1,7 @@
 // import { createStore } from 'redux';
 
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 
 import {
   persistStore,
@@ -22,7 +22,7 @@ const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER] },
   }),
-  logger,
+  // logger,
 ];
 
 const authPersistConfig = {

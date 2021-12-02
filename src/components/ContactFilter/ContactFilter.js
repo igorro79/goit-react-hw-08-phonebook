@@ -9,8 +9,18 @@ const Filter = ({ filter, handleInput, filtered, reset }) => {
   //     reset();
   // }
   return (
-    <Box sx={{ p: '3px', border: '1px solid grey', borderRadius: '5px' }}>
-      <Typography variant="subtitle1">Find Contact</Typography>{' '}
+    <Box
+      sx={{
+        p: '5px',
+        border: '1px solid grey',
+        borderRadius: '5px',
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <Typography sx={{ mr: 1 }} variant="subtitle1">
+        Find Contact
+      </Typography>{' '}
       <Box>
         {' '}
         <TextField

@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { useState, useEffect } from 'react';
 import * as s from './Register.module.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +7,6 @@ import { authOperations, authSelectors } from '../../redux/auth';
 import { errorReset } from '../../redux/auth/auth-slice';
 
 import { TextField, Button, Typography } from '@mui/material';
-// import authSlice from '../../redux/auth/auth-slice';
 
 function Register() {
   const [name, setName] = useState('');
@@ -19,6 +17,7 @@ function Register() {
 
   useEffect(() => {
     if (errorCurrent !== null) dispatch(errorReset(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const resetInput = () => {
@@ -55,7 +54,6 @@ function Register() {
     <form className={s.form} onSubmit={handleSubmit}>
       <TextField
         sx={{ mb: 1 }}
-        id="outlined-name"
         label="Name"
         name="name"
         type="text"
@@ -65,7 +63,6 @@ function Register() {
       />
       <TextField
         sx={{ mb: 1 }}
-        id="outlined-name"
         label="Email"
         name="email"
         type="text"
@@ -75,7 +72,6 @@ function Register() {
       />
       <TextField
         sx={{ mb: 1 }}
-        id="outlined-name"
         label="Password"
         type="password"
         name="password"

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import s from './ContactForm.module.css';
-import { contactsOperations, contactsSelectors } from '../../redux/contacts';
+
+import { contactsOperations, contactsSelectors, contactsActions } from '../../redux/contacts';
 import { TextField, Typography, Box, Button } from '@mui/material';
 
-function Form({ onSubmit, contacts }) {
+function AddContactForm({ onSubmit, contacts }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -69,7 +69,6 @@ function Form({ onSubmit, contacts }) {
             name="name"
             required
             id="outlined-name"
-            // placeholder="Enter a name"
             inputProps={{ 'aria-label': 'Enter new contact name' }}
           />
           <TextField
@@ -93,22 +92,23 @@ function Form({ onSubmit, contacts }) {
   );
 }
 
-Form.propTypes = {
+AddContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-const useStateToProps = state => {
+const mapStateToProps = state => {
   return {
     contacts: contactsSelectors.getContacts(state),
   };
 };
 
-const useDispachToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     onSubmit: newItem => {
       dispatch(contactsOperations.addContact(newItem));
+      dispatch(contactsActions.toggleModal());
     },
   };
 };
 
-export default connect(useStateToProps, useDispachToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(AddContactForm);

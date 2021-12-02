@@ -4,7 +4,7 @@ import { Typography, Grid } from '@mui/material';
 const ContactsList = ({ children }) => {
   return (
     <>
-      <Typography>Contacts:</Typography>
+      {/* <Typography>Contacts:</Typography> */}
       <Grid container spacing={2}>
         {children}
       </Grid>

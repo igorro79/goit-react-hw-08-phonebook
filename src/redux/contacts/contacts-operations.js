@@ -30,11 +30,19 @@ export const deleteContact = id => dispatch => {
     .catch(err => dispatch(actions.deleteContactError(err)));
 };
 
-export const filterContact = {};
+export const editContact = (id, updatedInfo) => dispatch => {
+  dispatch(actions.editContactRequest());
+
+  axios
+    .patch(`/contacts/${id}`, updatedInfo)
+    .then(({ data }) => dispatch(actions.editContactSuccess(data)))
+    .catch(err => dispatch(actions.editContactError(err)));
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   fetchContacts,
   addContact,
   deleteContact,
+  editContact,
 };

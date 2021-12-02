@@ -12,6 +12,9 @@ const items = createReducer([], {
   [actions.deleteContactSuccess]: (state, { payload }) => {
     return state.filter(item => item.id !== payload);
   },
+  [actions.editContactSuccess]: (state, { payload }) => {
+    return state.map(item => (item.id !== payload.id ? item : payload));
+  },
 });
 
 const loading = createReducer(false, {
@@ -32,18 +35,21 @@ const filter = createReducer('', {
   },
 });
 
-// const error = createReducer('', {});
+const openModal = createReducer(false, {
+  [actions.toggleModal]: state => {
+    return (state = !state);
+  },
+});
+const contactToEdit = createReducer(null, {
+  [actions.editContact]: (state, { payload }) => {
+    return (state = payload);
+  },
+});
 
 export default combineReducers({
   items,
   filter,
   loading,
-  //   error,
+  openModal,
+  contactToEdit,
 });
-
-// const contactsReducer = combineReducers({
-//   items: itemsReducer,
-//   filter: filterReducer,
-// });
-
-// export default contactsReducer;

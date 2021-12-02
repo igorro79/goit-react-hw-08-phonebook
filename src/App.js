@@ -3,16 +3,16 @@ import { Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, lazy, Suspense } from 'react';
 import { authOperations, authSelectors } from './redux/auth';
+
 import PrivateRoute from './Routes/Private-route';
 import PublicRoute from './Routes/Public-route';
-
-import { Container } from '@mui/material';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Spinner from './components/Spinner/Spinner';
+
+import { Container } from '@mui/material';
+
 const Register = lazy(() => import('./components/Register/Register'));
 const Login = lazy(() => import('./components/Login/Login'));
-// import Register from './components/Register/Register';
-// import Login from './components/Login/Login';
 
 const Contacts = lazy(() => import('./components/Contacts/Contacts'));
 const Home = lazy(() => import('./components/Home/Home'));
