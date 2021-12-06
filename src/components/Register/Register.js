@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as s from './Register.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-// import PropTypes from 'prop-types';
 
 import { authOperations, authSelectors } from '../../redux/auth';
 import { errorReset } from '../../redux/auth/auth-slice';

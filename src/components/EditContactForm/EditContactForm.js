@@ -6,14 +6,20 @@ import PropTypes from 'prop-types';
 import { contactsOperations, contactsSelectors, contactsActions } from '../../redux/contacts';
 import { TextField, Typography, Box, Button } from '@mui/material';
 
-function Form({ onSubmit, currentContact }) {
+function Form({ onSubmit, currentContact, contacts, noChanges, abortEditContact }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [id, setId] = useState('');
 
   useEffect(() => {
     setName(currentContact.name);
     setNumber(currentContact.number);
-  }, [currentContact.name, currentContact.number]);
+    setId(currentContact.id);
+    return () => {
+      abortEditContact();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const resetInput = () => {
     setName('');
@@ -37,10 +43,23 @@ function Form({ onSubmit, currentContact }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // if (contacts.map(contact => contact.name === name)) {
-    // alert('already exist')
-    //   return;
-    // } //=========сделать проверку ======
+    if (contacts.filter(contact => contact.id !== id).find(contact => contact.name === name)) {
+      alert('This NAME already is in the list of contacts');
+      return;
+    }
+    if (name === currentContact.name && number === currentContact.number) {
+      noChanges();
+      return;
+    }
+
+    if (
+      contacts
+        .filter(contact => contact.id !== id)
+        .find(contact => Number(contact.number) === Number(number))
+    ) {
+      alert('This NUMBER already is in the list of contacts');
+      return;
+    }
 
     onSubmit(currentContact.id, { name, number });
     resetInput();
@@ -75,8 +94,12 @@ function Form({ onSubmit, currentContact }) {
             name="name"
             required
             id="outlined-name"
-            // placeholder="Enter a name"
-            inputProps={{ 'aria-label': 'Enter new contact name' }}
+            inputProps={{
+              'aria-label': 'Enter new contact name',
+              pattern: "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
+              title:
+                "Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п.",
+            }}
           />
           <TextField
             size="small"
@@ -88,7 +111,13 @@ function Form({ onSubmit, currentContact }) {
             name="number"
             fullWidth
             label="Enter a number"
-            inputProps={{ 'aria-label': 'Enter new contact number' }}
+            inputProps={{
+              'aria-label': 'Enter new contact number',
+              pattern:
+                '[+]?[0-9,]{1,4}?[-, ]?[(]?[0-9, ]{1,3}?[)]?[-, ]?[0-9, ]{1,4}[-, ]?[0-9, ]{1,4}[-, ]?[0-9, ]{1,9}',
+              title:
+                'Номер телефона должен состоять из цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +',
+            }}
           />
         </Box>
         <Button size="small" type="submit">
@@ -106,11 +135,18 @@ Form.propTypes = {
 const useStateToProps = (state, id) => {
   return {
     currentContact: contactsSelectors.contactToEdit(state),
+    contacts: contactsSelectors.getContacts(state),
   };
 };
 
 const useDispachToProps = dispatch => {
   return {
+    noChanges: () => {
+      dispatch(contactsActions.toggleModal());
+    },
+    abortEditContact: () => {
+      dispatch(contactsActions.editContact(null));
+    },
     onSubmit: (id, newItem) => {
       dispatch(contactsOperations.editContact(id, newItem));
       dispatch(contactsActions.toggleModal());

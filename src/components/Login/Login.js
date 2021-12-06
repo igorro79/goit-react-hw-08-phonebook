@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as s from './Login.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-// import PropTypes from 'prop-types';
+
 import { authOperations, authSelectors } from '../../redux/auth';
 import { errorReset } from '../../redux/auth/auth-slice';
 import { TextField, Button, Typography } from '@mui/material';

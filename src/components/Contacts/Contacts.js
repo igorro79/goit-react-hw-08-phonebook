@@ -14,11 +14,11 @@ import Modal from '../../components/Modal/Modal';
 import AddContactForm from '../../components/AddContactForm/AddContactForm';
 import EditContactForm from '../../components/EditContactForm/EditContactForm';
 
-function Contacts(addNewContact) {
+function Contacts() {
   const dispatch = useDispatch();
   const shoudModalOpen = useSelector(contactsSelectors.getToggleModal);
   const contactToEdit = useSelector(contactsSelectors.contactToEdit);
-  // const { id, name, number } = contactToEdit;
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => dispatch(contactsOperations.fetchContacts()), []);
 
@@ -40,9 +40,7 @@ function Contacts(addNewContact) {
         >
           Add contact
         </Button>
-        {/* <IconButton aria-label="add contact" onClick={() => dispatch(actions.toggleModal())}>
-          <AddBoxIcon color="primary" sx={{ fontSize: 40 }} />
-        </IconButton> */}
+
         <Filter />
       </Box>
       <hr />
@@ -59,20 +57,7 @@ function Contacts(addNewContact) {
               borderRadius: '5px',
             }}
           >
-            <AddContactForm />
-          </Box>
-        </Modal>
-      )}
-      {shoudModalOpen && contactToEdit && (
-        <Modal>
-          <Box
-            sx={{
-              backgroundColor: '#fff',
-              padding: '50px',
-              borderRadius: '5px',
-            }}
-          >
-            <EditContactForm />
+            {contactToEdit ? <EditContactForm /> : <AddContactForm />}
           </Box>
         </Modal>
       )}

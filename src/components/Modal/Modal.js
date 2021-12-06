@@ -11,6 +11,7 @@ function Modal(props, id) {
   const dispatch = useDispatch();
 
   const onEscButton = e => {
+    console.log(e.code);
     if (e.code === 'Escape') {
       dispatch(actions.toggleModal());
     }
@@ -27,10 +28,11 @@ function Modal(props, id) {
     return () => {
       window.removeEventListener('keydown', onEscButton);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { children } = props;
-  console.log(props);
+
   return createPortal(
     <Box className={s.Overlay} onClick={closeModal}>
       <Box className={s.Modal}>{children}</Box>

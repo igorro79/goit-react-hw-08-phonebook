@@ -26,13 +26,19 @@ const ContactsListItem = ({ contacts, filtered, deleteContact, openEditContactFo
   } else {
     return filtered.map(contact => (
       <Grid key={contact.id} item xs={12} sm={6} md={4} lg={3}>
-        <Item sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-          {/* <Box> */}
-          <Typography sx={{ mr: '5px' }}>{contact.name}</Typography>
-          <Typography>
-            <Link href={`tel:${contact.number}`}>{contact.number}</Link>
-          </Typography>
-          {/* </Box> */}
+        <Item
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+          }}
+        >
+          <Box sx={{ textAlign: 'left', flexShrink: '3', overflow: 'hidden' }}>
+            <Typography sx={{ mr: '5px', overflow: 'auto' }}>{contact.name}</Typography>
+            <Typography sx={{ mr: '5px', overflow: 'auto' }}>
+              <Link href={`tel:${contact.number}`}>{contact.number}</Link>
+            </Typography>
+          </Box>
           <IconButton
             sx={{ ml: 'auto' }}
             aria-label="edit contact"

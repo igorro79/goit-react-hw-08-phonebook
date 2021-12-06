@@ -5,9 +5,6 @@ import { contactsSelectors } from '../../redux/contacts';
 import { TextField, Typography, Box } from '@mui/material';
 
 const Filter = ({ filter, handleInput, filtered, reset }) => {
-  //   if (filtered.length < 1) {
-  //     reset();
-  // }
   return (
     <Box
       sx={{

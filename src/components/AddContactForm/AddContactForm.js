@@ -31,10 +31,15 @@ function AddContactForm({ onSubmit, contacts }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // if (contacts.map(contact => contact.name === name)) {
-    // alert('already exist')
-    //   return;
-    // } //=========сделать проверку ======
+    if (contacts.find(contact => contact.name === name)) {
+      alert('This NAME already is in the list of contacts');
+      return;
+    }
+
+    if (contacts.find(contact => Number(contact.number) === Number(number))) {
+      alert('This NUMBER already is in the list of contacts');
+      return;
+    }
 
     onSubmit({ name, number });
     resetInput();
@@ -69,7 +74,12 @@ function AddContactForm({ onSubmit, contacts }) {
             name="name"
             required
             id="outlined-name"
-            inputProps={{ 'aria-label': 'Enter new contact name' }}
+            inputProps={{
+              'aria-label': 'Enter new contact name',
+              pattern: "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
+              title:
+                "Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п.",
+            }}
           />
           <TextField
             size="small"
@@ -81,7 +91,15 @@ function AddContactForm({ onSubmit, contacts }) {
             name="number"
             fullWidth
             label="Enter a number"
-            inputProps={{ 'aria-label': 'Enter new contact number' }}
+            inputProps={{
+              'aria-label': 'Enter new contact number',
+
+              // eslint-disable-next-line no-useless-escape
+              pattern:
+                '[+]?[0-9,]{1,4}?[-, ]?[(]?[0-9, ]{1,3}?[)]?[-, ]?[0-9, ]{1,4}[-, ]?[0-9, ]{1,4}[-, ]?[0-9, ]{1,9}',
+              title:
+                'Номер телефона должен состоять из цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +',
+            }}
           />
         </Box>
         <Button size="small" type="submit">
